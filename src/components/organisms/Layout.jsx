@@ -42,14 +42,14 @@ const Layout = () => {
 
     // Create folder map
     folders.forEach(folder => {
-      folderMap.set(folder.id, { ...folder, children: [] });
+folderMap.set(folder.Id, { ...folder, children: [] });
     });
 
     // Build tree
     folders.forEach(folder => {
-      const folderNode = folderMap.get(folder.id);
-      if (folder.parentId && folderMap.has(folder.parentId)) {
-        folderMap.get(folder.parentId).children.push(folderNode);
+      const folderNode = folderMap.get(folder.Id);
+      if (folder.parent_id_c && folderMap.has(folder.parent_id_c)) {
+        folderMap.get(folder.parent_id_c).children.push(folderNode);
       } else {
         rootFolders.push(folderNode);
       }

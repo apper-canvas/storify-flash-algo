@@ -44,22 +44,22 @@ const AllFiles = () => {
 
   const handleFileSelect = (file) => {
     const fileItem = { ...file, type: 'file' };
-    setSelectedItems(prev => {
-      const isSelected = prev.some(item => item.id === file.id && item.type === 'file');
+setSelectedItems(prev => {
+      const isSelected = prev.some(item => item.Id === file.Id && item.type === 'file');
       if (isSelected) {
-        return prev.filter(item => !(item.id === file.id && item.type === 'file'));
+        return prev.filter(item => !(item.Id === file.Id && item.type === 'file'));
       } else {
         return [...prev, fileItem];
       }
     });
   };
 
-  const handleFolderSelect = (folder) => {
+const handleFolderSelect = (folder) => {
     const folderItem = { ...folder, type: 'folder' };
     setSelectedItems(prev => {
-      const isSelected = prev.some(item => item.id === folder.id && item.type === 'folder');
+      const isSelected = prev.some(item => item.Id === folder.Id && item.type === 'folder');
       if (isSelected) {
-        return prev.filter(item => !(item.id === folder.id && item.type === 'folder'));
+        return prev.filter(item => !(item.Id === folder.Id && item.type === 'folder'));
       } else {
         return [...prev, folderItem];
       }
@@ -73,8 +73,8 @@ const AllFiles = () => {
 
   const handleFolderDoubleClick = (folder) => {
     setSearchParams(prev => {
-      const newParams = new URLSearchParams(prev);
-      newParams.set("folderId", folder.id);
+const newParams = new URLSearchParams(prev);
+      newParams.set("folderId", folder.Id);
       return newParams;
     });
     setSelectedItems([]);
@@ -82,12 +82,12 @@ const AllFiles = () => {
 
   const handleToggleStar = async (file) => {
     try {
-      const updatedFile = await fileService.update(file.id, { 
-        starred: !file.starred 
+const updatedFile = await fileService.update(file.Id, { 
+        starred_c: !file.starred_c 
       });
       
       setFiles(prev => prev.map(f => 
-        f.id === file.id ? updatedFile : f
+        f.Id === file.Id ? updatedFile : f
       ));
       
       toast.success(updatedFile.starred ? "Added to starred" : "Removed from starred");
@@ -130,8 +130,8 @@ const AllFiles = () => {
   const handleUpload = async (fileList) => {
     try {
       const uploadPromises = Array.from(fileList).map(file => {
-        return fileService.create({
-          name: file.name,
+return fileService.create({
+          name_c: file.name,
           type: getFileType(file.type),
           size: file.size,
           folderId: currentFolderId,
@@ -164,8 +164,8 @@ const AllFiles = () => {
   const getBreadcrumb = () => {
     // This would normally be built from the current folder path
     // For now, return empty array for root folder
-    return currentFolderId ? [
-      { id: currentFolderId, name: "Sample Folder", path: `/folder/${currentFolderId}` }
+return currentFolderId ? [
+      { Id: currentFolderId, name_c: "Sample Folder", path_c: `/folder/${currentFolderId}` }
     ] : [];
   };
 

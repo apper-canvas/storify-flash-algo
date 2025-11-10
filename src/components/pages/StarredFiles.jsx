@@ -25,7 +25,7 @@ const StarredFiles = () => {
     
     try {
       const allFiles = await fileService.getAll();
-      const starredFiles = allFiles.filter(file => file.starred);
+const starredFiles = allFiles.filter(file => file.starred_c);
       setFiles(starredFiles);
     } catch (err) {
       setError("Failed to load starred files");
@@ -39,8 +39,8 @@ const StarredFiles = () => {
     const fileItem = { ...file, type: 'file' };
     setSelectedItems(prev => {
       const isSelected = prev.some(item => item.id === file.id && item.type === 'file');
-      if (isSelected) {
-        return prev.filter(item => !(item.id === file.id && item.type === 'file'));
+if (isSelected) {
+        return prev.filter(item => !(item.Id === file.Id && item.type === 'file'));
       } else {
         return [...prev, fileItem];
       }
@@ -56,19 +56,19 @@ const StarredFiles = () => {
     try {
       const updatedFile = await fileService.update(file.id, { 
         starred: !file.starred 
-      });
+});
       
-      if (updatedFile.starred) {
+      if (updatedFile.starred_c) {
         setFiles(prev => prev.map(f => 
-          f.id === file.id ? updatedFile : f
+          f.Id === file.Id ? updatedFile : f
         ));
         toast.success("Added to starred");
       } else {
-        setFiles(prev => prev.filter(f => f.id !== file.id));
+        setFiles(prev => prev.filter(f => f.Id !== file.Id));
         toast.success("Removed from starred");
       }
       
-      setSelectedItems(prev => prev.filter(item => item.id !== file.id));
+      setSelectedItems(prev => prev.filter(item => item.Id !== file.Id));
     } catch (error) {
       toast.error("Failed to update file");
     }
@@ -103,8 +103,8 @@ const StarredFiles = () => {
           type: getFileType(file.type),
           size: file.size,
           folderId: null,
-          starred: true, // Auto-star uploaded files in starred view
-          thumbnailUrl: file.type.startsWith('image/') ? URL.createObjectURL(file) : null
+starred_c: true, // Auto-star uploaded files in starred view
+          thumbnail_url_c: file.type.startsWith('image/') ? URL.createObjectURL(file) : null
         });
       });
 

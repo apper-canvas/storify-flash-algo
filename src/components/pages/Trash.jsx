@@ -31,7 +31,7 @@ const Trash = () => {
       // For this demo, we'll simulate deleted files
       // In a real app, you'd have a separate trash API
       const allFiles = await fileService.getAll();
-      const deletedFiles = allFiles.filter(file => file.deleted);
+const deletedFiles = allFiles.filter(file => file.deleted_c);
       setFiles(deletedFiles);
     } catch (err) {
       setError("Failed to load deleted files");
@@ -44,9 +44,9 @@ const Trash = () => {
   const handleFileSelect = (file) => {
     const fileItem = { ...file, type: 'file' };
     setSelectedItems(prev => {
-      const isSelected = prev.some(item => item.id === file.id && item.type === 'file');
+const isSelected = prev.some(item => item.Id === file.Id && item.type === 'file');
       if (isSelected) {
-        return prev.filter(item => !(item.id === file.id && item.type === 'file'));
+        return prev.filter(item => !(item.Id === file.Id && item.type === 'file'));
       } else {
         return [...prev, fileItem];
       }
@@ -61,14 +61,14 @@ const Trash = () => {
     if (selectedItems.length === 0) return;
 
     try {
-      const restorePromises = selectedItems.map(item => 
-        fileService.update(item.id, { deleted: false })
+const restorePromises = selectedItems.map(item => 
+        fileService.update(item.Id, { deleted_c: false })
       );
 
       await Promise.all(restorePromises);
       
-      setFiles(prev => prev.filter(file => 
-        !selectedItems.some(item => item.id === file.id)
+setFiles(prev => prev.filter(file => 
+        !selectedItems.some(item => item.Id === file.Id)
       ));
       
       setSelectedItems([]);
@@ -88,14 +88,14 @@ const Trash = () => {
     if (!confirmed) return;
 
     try {
-      const deletePromises = selectedItems.map(item => 
-        fileService.delete(item.id)
+const deletePromises = selectedItems.map(item => 
+        fileService.delete(item.Id)
       );
 
       await Promise.all(deletePromises);
       
-      setFiles(prev => prev.filter(file => 
-        !selectedItems.some(item => item.id === file.id)
+setFiles(prev => prev.filter(file => 
+        !selectedItems.some(item => item.Id === file.Id)
       ));
       
       setSelectedItems([]);
@@ -115,7 +115,7 @@ const Trash = () => {
     if (!confirmed) return;
 
     try {
-      const deletePromises = files.map(file => fileService.delete(file.id));
+const deletePromises = files.map(file => fileService.delete(file.Id));
       await Promise.all(deletePromises);
       
       setFiles([]);
@@ -235,8 +235,8 @@ const Trash = () => {
           <div className="flex items-center gap-3">
             <ApperIcon name="AlertTriangle" className="w-5 h-5 text-yellow-600" />
             <div className="text-sm text-yellow-800">
-              <strong>Auto-delete:</strong> Files in trash are automatically deleted after 30 days.
-              The oldest file will be deleted {formatDistanceToNow(new Date(files[0]?.modifiedAt), { addSuffix: true })}.
+<strong>Auto-delete:</strong> Files in trash are automatically deleted after 30 days.
+              The oldest file will be deleted {formatDistanceToNow(new Date(files[0]?.ModifiedOn), { addSuffix: true })}.
             </div>
           </div>
         </Card>

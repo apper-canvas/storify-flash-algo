@@ -71,19 +71,19 @@ const FileCard = ({
       <div className="p-4">
         {/* Thumbnail/Icon */}
         <div className="relative mb-3">
-          {file.thumbnailUrl ? (
+{file.thumbnail_url_c || file.thumbnailUrl ? (
             <div className="aspect-square rounded-lg overflow-hidden bg-gray-100">
               <img 
-                src={file.thumbnailUrl} 
-                alt={file.name}
+                src={file.thumbnail_url_c || file.thumbnailUrl} 
+                alt={file.name_c || file.name}
                 className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-110"
               />
             </div>
           ) : (
             <div className="aspect-square rounded-lg bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
               <ApperIcon 
-                name={getFileIcon(file.type)} 
-                className={cn("w-12 h-12", getFileTypeColor(file.type))}
+name={getFileIcon(file.type_c || file.type)} 
+                className={cn("w-12 h-12", getFileTypeColor(file.type_c || file.type))}
               />
             </div>
           )}
@@ -92,17 +92,17 @@ const FileCard = ({
           <button
             onClick={(e) => {
               e.stopPropagation();
-              onToggleStar?.(file);
+onToggleStar?.(file);
             }}
             className={cn(
               "absolute top-2 right-2 p-1.5 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100",
-              file.starred ? "bg-yellow-100 text-yellow-600 opacity-100" : "bg-white/80 backdrop-blur-sm text-gray-400 hover:text-yellow-500"
+              (file.starred_c || file.starred) ? "bg-yellow-100 text-yellow-600 opacity-100" : "bg-white/80 backdrop-blur-sm text-gray-400 hover:text-yellow-500"
             )}
           >
             <ApperIcon 
-              name={file.starred ? "Star" : "Star"} 
+              name={(file.starred_c || file.starred) ? "Star" : "Star"} 
               className="w-4 h-4" 
-              fill={file.starred ? "currentColor" : "none"}
+              fill={(file.starred_c || file.starred) ? "currentColor" : "none"}
             />
           </button>
         </div>
@@ -110,17 +110,17 @@ const FileCard = ({
         {/* File Info */}
         <div className="space-y-2">
           <div>
-            <h3 className="font-medium text-gray-900 text-sm leading-tight line-clamp-2 group-hover:text-primary-600 transition-colors duration-200">
-              {file.name}
+<h3 className="font-medium text-gray-900 text-sm leading-tight line-clamp-2 group-hover:text-primary-600 transition-colors duration-200">
+              {file.name_c || file.name}
             </h3>
             <p className="text-xs text-gray-500 mt-1">
-              {formatFileSize(file.size)}
+              {formatFileSize(file.size_c || file.size)}
             </p>
           </div>
           
           <div className="flex items-center justify-between text-xs text-gray-400">
-            <span className="capitalize">{file.type}</span>
-            <span>{formatDistanceToNow(new Date(file.modifiedAt), { addSuffix: true })}</span>
+<span className="capitalize">{file.type_c || file.type}</span>
+            <span>{formatDistanceToNow(new Date(file.ModifiedOn || file.modifiedAt), { addSuffix: true })}</span>
           </div>
         </div>
       </div>

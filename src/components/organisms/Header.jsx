@@ -4,6 +4,7 @@ import { cn } from "@/utils/cn";
 import ApperIcon from "@/components/ApperIcon";
 import SearchBar from "@/components/molecules/SearchBar";
 import Button from "@/components/atoms/Button";
+import LogoutButton from "@/components/molecules/LogoutButton";
 
 const Header = ({ 
   onSearch,
@@ -32,7 +33,7 @@ const Header = ({
   };
 
   return (
-    <header 
+<header 
       className={cn(
         "sticky top-0 z-40 w-full border-b border-gray-200 bg-white/80 backdrop-blur-sm",
         className
@@ -94,6 +95,9 @@ const Header = ({
           >
             <span className="hidden sm:inline">Upload</span>
           </Button>
+
+          {/* Logout button */}
+          <LogoutButton />
 
           {/* Profile/Settings */}
           <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors duration-200 hidden sm:block">

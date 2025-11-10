@@ -34,15 +34,15 @@ const FolderCard = ({
         <div className="relative mb-3">
           <div className="aspect-square rounded-lg bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-200">
             <ApperIcon 
-              name={folder.icon || "Folder"} 
+name={folder.icon_c || folder.icon || "Folder"} 
               className="w-12 h-12 text-white"
             />
           </div>
           
           {/* Item count badge */}
-          {folder.itemCount > 0 && (
+{(folder.item_count_c || folder.itemCount) > 0 && (
             <div className="absolute -top-1 -right-1 bg-accent-500 text-white text-xs font-medium px-2 py-1 rounded-full min-w-[20px] text-center">
-              {folder.itemCount}
+              {folder.item_count_c || folder.itemCount}
             </div>
           )}
         </div>
@@ -51,16 +51,16 @@ const FolderCard = ({
         <div className="space-y-2">
           <div>
             <h3 className="font-medium text-gray-900 text-sm leading-tight line-clamp-2 group-hover:text-primary-600 transition-colors duration-200">
-              {folder.name}
+{folder.name_c || folder.name}
             </h3>
             <p className="text-xs text-gray-500 mt-1">
-              {folder.itemCount} {folder.itemCount === 1 ? 'item' : 'items'}
+              {folder.item_count_c || folder.itemCount || 0} {(folder.item_count_c || folder.itemCount) === 1 ? 'item' : 'items'}
             </p>
           </div>
           
           <div className="flex items-center justify-between text-xs text-gray-400">
-            <span>Folder</span>
-            <span>{formatDistanceToNow(new Date(folder.createdAt), { addSuffix: true })}</span>
+<span>Folder</span>
+            <span>{formatDistanceToNow(new Date(folder.CreatedOn || folder.createdAt), { addSuffix: true })}</span>
           </div>
         </div>
       </div>

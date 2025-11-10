@@ -37,7 +37,7 @@ const FileGrid = ({
 
   // Sort files and folders
   const sortedItems = useMemo(() => {
-    const allItems = [
+const allItems = [
       ...folders.map(folder => ({ ...folder, type: 'folder' })),
       ...files.map(file => ({ ...file, type: 'file' }))
     ];
@@ -51,24 +51,24 @@ const FileGrid = ({
 
       switch (sortBy) {
         case 'name':
-          aValue = a.name.toLowerCase();
-          bValue = b.name.toLowerCase();
+          aValue = (a.name_c || a.Name || a.name || '').toLowerCase();
+          bValue = (b.name_c || b.Name || b.name || '').toLowerCase();
           break;
         case 'modifiedAt':
-          aValue = new Date(a.modifiedAt || a.createdAt);
-          bValue = new Date(b.modifiedAt || b.createdAt);
+          aValue = new Date(a.ModifiedOn || a.CreatedOn || a.modifiedAt || a.createdAt);
+          bValue = new Date(b.ModifiedOn || b.CreatedOn || b.modifiedAt || b.createdAt);
           break;
         case 'size':
-          aValue = a.size || 0;
-          bValue = b.size || 0;
+          aValue = a.size_c || a.size || 0;
+          bValue = b.size_c || b.size || 0;
           break;
         case 'type':
-          aValue = a.type;
-          bValue = b.type;
+          aValue = a.type_c || a.type;
+          bValue = b.type_c || b.type;
           break;
         default:
-          aValue = a.name.toLowerCase();
-          bValue = b.name.toLowerCase();
+          aValue = (a.name_c || a.Name || a.name || '').toLowerCase();
+          bValue = (b.name_c || b.Name || b.name || '').toLowerCase();
       }
 
       if (sortOrder === 'asc') {
@@ -165,15 +165,15 @@ const FileGrid = ({
             ? "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4" 
             : "space-y-2"
         )}>
-          {sortedItems.map((item) => {
+{sortedItems.map((item) => {
             const isSelected = selectedItems.some(selected => 
-              selected.id === item.id && selected.type === item.type
+              selected.Id === item.Id && selected.type === item.type
             );
 
             if (item.type === 'folder') {
               return (
                 <FolderCard
-                  key={`folder-${item.id}`}
+key={`folder-${item.Id}`}
                   folder={item}
                   isSelected={isSelected}
                   onSelect={onFolderSelect}
@@ -184,7 +184,7 @@ const FileGrid = ({
             } else {
               return (
                 <FileCard
-                  key={`file-${item.id}`}
+key={`file-${item.Id}`}
                   file={item}
                   isSelected={isSelected}
                   onSelect={onFileSelect}

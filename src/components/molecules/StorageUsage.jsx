@@ -17,7 +17,7 @@ const StorageUsage = ({
     return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + " " + sizes[i];
   };
 
-  const usagePercentage = (stats.usedSpace / stats.totalSpace) * 100;
+const usagePercentage = (stats.usedSpace / stats.totalSpace) * 100;
   const remainingSpace = stats.totalSpace - stats.usedSpace;
 
   const getUsageColor = () => {
@@ -27,10 +27,10 @@ const StorageUsage = ({
   };
 
   const breakdownData = [
-    { label: "Images", value: stats.breakdown.images, icon: "Image", color: "text-green-500" },
-    { label: "Documents", value: stats.breakdown.documents, icon: "FileText", color: "text-blue-500" },
-    { label: "Videos", value: stats.breakdown.videos, icon: "Video", color: "text-purple-500" },
-    { label: "Other", value: stats.breakdown.other, icon: "File", color: "text-gray-500" }
+{ label: "Images", value: stats.breakdown?.images || 0, icon: "Image", color: "text-green-500" },
+    { label: "Documents", value: stats.breakdown?.documents || 0, icon: "FileText", color: "text-blue-500" },
+    { label: "Videos", value: stats.breakdown?.videos || 0, icon: "Video", color: "text-purple-500" },
+    { label: "Other", value: stats.breakdown?.other || 0, icon: "File", color: "text-gray-500" }
   ].filter(item => item.value > 0);
 
   return (

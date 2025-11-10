@@ -31,7 +31,7 @@ const RecentFiles = () => {
       thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
       
       const recentFiles = allFiles
-        .filter(file => new Date(file.modifiedAt) >= thirtyDaysAgo)
+.filter(file => new Date(file.ModifiedOn) >= thirtyDaysAgo)
         .sort((a, b) => new Date(b.modifiedAt) - new Date(a.modifiedAt));
       
       setFiles(recentFiles);
@@ -45,10 +45,10 @@ const RecentFiles = () => {
 
   const handleFileSelect = (file) => {
     const fileItem = { ...file, type: 'file' };
-    setSelectedItems(prev => {
-      const isSelected = prev.some(item => item.id === file.id && item.type === 'file');
+setSelectedItems(prev => {
+      const isSelected = prev.some(item => item.Id === file.Id && item.type === 'file');
       if (isSelected) {
-        return prev.filter(item => !(item.id === file.id && item.type === 'file'));
+        return prev.filter(item => !(item.Id === file.Id && item.type === 'file'));
       } else {
         return [...prev, fileItem];
       }
@@ -62,12 +62,12 @@ const RecentFiles = () => {
 
   const handleToggleStar = async (file) => {
     try {
-      const updatedFile = await fileService.update(file.id, { 
-        starred: !file.starred 
+const updatedFile = await fileService.update(file.Id, { 
+        starred_c: !file.starred_c 
       });
       
       setFiles(prev => prev.map(f => 
-        f.id === file.id ? updatedFile : f
+        f.Id === file.Id ? updatedFile : f
       ));
       
       toast.success(updatedFile.starred ? "Added to starred" : "Removed from starred");
@@ -104,7 +104,7 @@ const RecentFiles = () => {
           name: file.name,
           type: getFileType(file.type),
           size: file.size,
-          folderId: null,
+folder_id_c: null,
           thumbnailUrl: file.type.startsWith('image/') ? URL.createObjectURL(file) : null
         });
       });
